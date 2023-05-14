@@ -23,7 +23,7 @@
               <el-menu-item index="2-4-3">选项3</el-menu-item>
             </el-submenu>
           </el-submenu>
-          <el-menu-item index="3"><router-link to="/">创作中心</router-link></el-menu-item>
+          <el-menu-item index="3"><router-link to="/creation">创作中心</router-link></el-menu-item>
           <el-menu-item index="4"><router-link to="/">消息</router-link></el-menu-item>
         </el-menu>
       </el-row>
@@ -47,7 +47,7 @@
      <el-input placeholder="请输入内容" v-model="input" id="input" size="medium " clearable> 
         </el-input>
       </div>
-      <router-view />
+      <!-- <router-view /> -->
     </div>
 
     
@@ -72,6 +72,7 @@
   <el-menu-item index="10"><router-link to="/person" >科技</router-link> </el-menu-item>
 </el-row>
 </el-menu>
+<router-view />
   </div>
 </template>
 
@@ -101,6 +102,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin:50px;
 }
 
 .nav {
