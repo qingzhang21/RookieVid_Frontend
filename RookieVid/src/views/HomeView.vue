@@ -20,11 +20,33 @@
       </div>
     </div>
     <div class="recommend">
-      <div class="menu">娱乐</div>
+      <div class="menu">娱乐
+        <router-link :to="'/recreation'" v-slot="{ navigate }" custom>
+          <el-button @click="navigate" size="small" style="align-self:flex-end;">查看全部  ></el-button>
+        </router-link>
+      </div>
       <div class="recommend-container">
         <div v-for="(video,index) in this.partition1" :key="index" class="recommend-item">
-          <img class="recommend-img" :src="video.cover_url">
-          <div class="title">{{ video.title }}</div>
+          <router-link :to="'/view'+video.video_id">
+           <img class="recommend-img" :src="video.cover_url">
+          </router-link>
+          <div class="overlay">
+            <span class="play-info">
+              <img class="play-icon" src="../assets/display/play_circle_outline.svg">
+              {{video.view_amount }}</span>
+            <span class="like-info">
+              <img class="like-icon" src="../assets/display/thumb-up.svg">
+              {{ video.like_amount }}
+            </span>
+          </div>
+          <router-link :to="'/view'">
+            <a class="title">{{ video.title }}</a>
+          </router-link>
+          <div class="author">
+            <span class="author-tag">作者</span>
+            <span class="author-name">{{ video.user_name }}</span>
+            <span class="time">{{ video.created_at.split('T')[0] }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -33,7 +55,21 @@
       <div class="recommend-container">
         <div v-for="(video,index) in this.partition2" :key="index" class="recommend-item">
           <img class="recommend-img" :src="video.cover_url">
+          <div class="overlay">
+            <span class="play-info">
+              <img class="play-icon" src="../assets/display/play_circle_outline.svg">
+              {{video.view_amount }}</span>
+            <span class="like-info">
+              <img class="like-icon" src="../assets/display/thumb-up.svg">
+              {{ video.like_amount }}
+            </span>
+          </div>
           <div class="title">{{ video.title }}</div>
+          <div class="author">
+            <span class="author-tag">作者</span>
+            <span class="author-name">{{ video.user_name }}</span>
+            <span class="time">{{ video.created_at.split('T')[0] }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -42,7 +78,21 @@
       <div class="recommend-container">
         <div v-for="(video,index) in this.partition3" :key="index" class="recommend-item">
           <img class="recommend-img" :src="video.cover_url">
+          <div class="overlay">
+            <span class="play-info">
+              <img class="play-icon" src="../assets/display/play_circle_outline.svg">
+              {{video.view_amount }}</span>
+            <span class="like-info">
+              <img class="like-icon" src="../assets/display/thumb-up.svg">
+              {{ video.like_amount }}
+            </span>
+          </div>
           <div class="title">{{ video.title }}</div>
+          <div class="author">
+            <span class="author-tag">作者</span>
+            <span class="author-name">{{ video.user_name }}</span>
+            <span class="time">{{ video.created_at.split('T')[0] }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -51,7 +101,21 @@
       <div class="recommend-container">
         <div v-for="(video,index) in this.partition4" :key="index" class="recommend-item">
           <img class="recommend-img" :src="video.cover_url">
+          <div class="overlay">
+            <span class="play-info">
+              <img class="play-icon" src="../assets/display/play_circle_outline.svg">
+              {{video.view_amount }}</span>
+            <span class="like-info">
+              <img class="like-icon" src="../assets/display/thumb-up.svg">
+              {{ video.like_amount }}
+            </span>
+          </div>
           <div class="title">{{ video.title }}</div>
+          <div class="author">
+            <span class="author-tag">作者</span>
+            <span class="author-name">{{ video.user_name }}</span>
+            <span class="time">{{ video.created_at.split('T')[0] }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -60,10 +124,20 @@
       <div class="recommend-container">
         <div v-for="(video,index) in this.partition5" :key="index" class="recommend-item">
           <img class="recommend-img" :src="video.cover_url">
+          <div class="overlay">
+            <span class="play-info">
+              <img class="play-icon" src="../assets/display/play_circle_outline.svg">
+              {{video.view_amount }}</span>
+            <span class="like-info">
+              <img class="like-icon" src="../assets/display/thumb-up.svg">
+              {{ video.like_amount }}
+            </span>
+          </div>
           <div class="title">{{ video.title }}</div>
           <div class="author">
-            <span class="author_tag">作者</span>
-            <span class="author_name"></span>
+            <span class="author-tag">作者</span>
+            <span class="author-name">{{ video.user_name }}</span>
+            <span class="time">{{ video.created_at.split('T')[0] }}</span>
           </div>
         </div>
       </div>
@@ -73,7 +147,21 @@
       <div class="recommend-container">
         <div v-for="(video,index) in this.partition6" :key="index" class="recommend-item">
           <img class="recommend-img" :src="video.cover_url" @click="video_play">
+          <div class="overlay">
+            <span class="play-info">
+              <img class="play-icon" src="../assets/display/play_circle_outline.svg">
+              {{video.view_amount }}</span>
+            <span class="like-info">
+              <img class="like-icon" src="../assets/display/thumb-up.svg">
+              {{ video.like_amount }}
+            </span>
+          </div>
           <div class="title">{{ video.title }}</div>
+          <div class="author">
+            <span class="author-tag">作者</span>
+            <span class="author-name">{{ video.user_name }}</span>
+            <span class="time">{{ video.created_at.split('T')[0] }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -82,7 +170,21 @@
       <div class="recommend-container">
         <div v-for="(video,index) in this.partition7" :key="index" class="recommend-item">
           <img class="recommend-img" :src="video.cover_url">
+          <div class="overlay">
+            <span class="play-info">
+              <img class="play-icon" src="../assets/display/play_circle_outline.svg">
+              {{video.view_amount }}</span>
+            <span class="like-info">
+              <img class="like-icon" src="../assets/display/thumb-up.svg">
+              {{ video.like_amount }}
+            </span>
+          </div>
           <div class="title">{{ video.title }}</div>
+          <div class="author">
+            <span class="author-tag">作者</span>
+            <span class="author-name">{{ video.user_name }}</span>
+            <span class="time">{{ video.created_at.split('T')[0] }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -91,7 +193,21 @@
       <div class="recommend-container">
         <div v-for="(video,index) in this.partition8" :key="index" class="recommend-item">
           <img class="recommend-img" :src="video.cover_url">
+          <div class="overlay">
+            <span class="play-info">
+              <img class="play-icon" src="../assets/display/play_circle_outline.svg">
+              {{video.view_amount }}</span>
+            <span class="like-info">
+              <img class="like-icon" src="../assets/display/thumb-up.svg">
+              {{ video.like_amount }}
+            </span>
+          </div>
           <div class="title">{{ video.title }}</div>
+          <div class="author">
+            <span class="author-tag">作者</span>
+            <span class="author-name">{{ video.user_name }}</span>
+            <span class="time">{{ video.created_at.split('T')[0] }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -100,7 +216,21 @@
       <div class="recommend-container">
         <div v-for="(video,index) in this.partition9" :key="index" class="recommend-item">
           <img class="recommend-img" :src="video.cover_url">
+          <div class="overlay">
+            <span class="play-info">
+              <img class="play-icon" src="../assets/display/play_circle_outline.svg">
+              {{video.view_amount }}</span>
+            <span class="like-info">
+              <img class="like-icon" src="../assets/display/thumb-up.svg">
+              {{ video.like_amount }}
+            </span>
+          </div>
           <div class="title">{{ video.title }}</div>
+          <div class="author">
+            <span class="author-tag">作者</span>
+            <span class="author-name">{{ video.user_name }}</span>
+            <span class="time">{{ video.created_at.split('T')[0] }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -329,6 +459,7 @@
 
 <script>
 import axios from 'axios'
+import { RouterLink } from 'vue-router'
 
 export default{
   data(){
@@ -381,9 +512,8 @@ export default{
         (this.currentIndex + this.images.length + offset) % this.images.length
       );
     },
-    video_play(){
-
-
+    video_play(video_id){
+    
     },
     getData(text){
       Promise.all([
@@ -393,8 +523,8 @@ export default{
       .then(([response1,response2])=>{
         console.log(response1.data);
         console.log(response2.data);
-        if (Array.isArray(response1.data.videos)) {
-          response1.data.videos.forEach((video, index) => {
+        if (Array.isArray(response1.data.video)) {
+          response1.data.video.forEach((video, index) => {
             this.images[index] = video.cover_url;
             this.titles[index] = video.title;
             this.videos[index] = video.video_url;
@@ -403,7 +533,8 @@ export default{
           console.log(`Error in getData(${text}): response.data is not an array`);
         }
         // console.log(response.data);
-        response2.data.videos.forEach((video,index)=>{
+        response2.data.video.forEach((video,index)=>{
+          console.log(text);
           if(text==='娱乐'){this.partition1[index]=video;}  
           if(text==='生活'){this.partition2[index]=video;}
           if(text==='学习'){this.partition3[index]=video;}
@@ -486,7 +617,8 @@ export default{
  <style>
  .menu{
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
   height: 60px;
   line-height: 60px;
   margin-top:20px;
@@ -497,7 +629,8 @@ export default{
   text-transform: uppercase;
   letter-spacing: 1px;
   line-height: 1.5;
-  text-shadow: 1px 1px 1px #ccc;
+  text-shadow: 2px 2px 2px #ccc;
+  flex:1;
  }
  .recommend-container {
   display: grid;
@@ -507,7 +640,7 @@ export default{
 }
 .recommend-item {
     width: 100%;
-    height: 200px;
+    height: 250px;
     position: relative;
     margin-bottom: 20px;
 }
@@ -518,14 +651,41 @@ export default{
   border-radius: 6px;
 }
 
+.overlay {
+  position: absolute;
+  bottom: 40%;
+  left: 0;
+  width: 100%;
+  height: 10%;
+  background-color:rgba(255, 255, 255,0.5); 
+  display: flex;
+  justify-content: space-between;
+  /* background-color: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8)); */
+}
   
-
+.play-info, .like-info {
+  display: flex;
+  align-items: center;
+  color: rgb(78, 77, 77);
+  font-weight:bold;
+  margin-left: 8px;
+  margin-right:8px;
+}
+.play-icon, .like-icon{
+  margin:5px;
+}
+a{
+  text-decoration: none;
+}
+.router-link-active {
+  text-decoration: none;
+}
 .title {
-    position: absolute;
+    position: relative;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 25%;
+    height: 20%;
     /* background-color: rgba(0, 0, 0, 0.5); */
     color: black;
     display: flex;
@@ -535,7 +695,54 @@ export default{
     font-weight: bold;
     padding: 10px;
     box-sizing: border-box;
+    word-break:break-all;
+    text-overflow:ellipsis;
+    word-break:break-all;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    overflow:hidden;
   }
+ 
+.title:hover{
+    color:#1e90ff;
+  }
+
+.author {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  margin-top: 8px;
+  margin-left:5px;
+}
+
+.author-tag {
+  /* width:50px;
+  height:30px; */
+  border: 1px solid #20bcf0;
+  font-weight:bold;
+  color: #20bcf0;
+  font-size: 10px;
+  background-color: rgba(35, 179, 241, 0.1);
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin-right: 8px;
+}
+
+.author-name {
+  font-weight: bold;
+  color: grey;
+  padding: 2px 8px;
+  /* margin-right:0; */
+}
+.time{
+  color:grey;
+  font-size:smaller;
+  margin-top:5px;
+  margin-left:30px;
+  
+}
+
 .carousel-container {
   padding-top:10px;
   width: 80%;

@@ -8,7 +8,7 @@
               <el-input v-model="form.title" ></el-input>
         </el-form-item>
         <el-form-item label="视频封面" prop="cover" style="margin-top:20px">
-              <el-input v-model="form.cover" id="upload_cover" type="file" style="display:none;" ></el-input>
+              <el-input v-model="form.cover" id="upload_cover" type="file" accept=".jpg,.png,.jpeg" style="display:none;" ></el-input>
               <label for="upload_cover">
                 <img src="../assets/upload/upload_cover.png" style="height: 100px; width:100px;opacity: 0.6;">
               </label>
@@ -32,7 +32,7 @@
         </el-form-item>
         </div>
         <div class="upload_video" prop="video">
-          <el-input v-model="form.video" id="upload_video" type="file" ref="fileInput"  style="display:none"/>
+          <el-input v-model="form.video" id="upload_video" type="file" ref="fileInput" accept=".mp4"  style="display:none"/>
           <label for="upload_video">
             <img src="../assets/upload/cloud_upload.svg" style="opacity:0.6">
           </label>
