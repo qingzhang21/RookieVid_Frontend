@@ -1,5 +1,14 @@
 <template>
     <div class="recreation">
+      <div class="top-carousel">
+        <el-carousel :interval="4000" type="card" height="400px">
+          <el-carousel-item v-for="(video,index) in this.top_videos" :key="index">
+            <img class="top-img" :src="video.cover_url" style="height:100%">
+          </el-carousel-item>
+
+        </el-carousel>
+
+      </div>
       <div class="recommend-container">
         <div v-for="(video,index) in this.videos" :key="index" class="recommend-item">
           <router-link :to="'/view'+video.video_id">
@@ -33,20 +42,29 @@ export default{
     data(){
         return {
             videos:[""],
+            top_videos:[""],
         }
     },
     created(){
-        this.getData('娱乐');
+        this.getData('娱乐',-1);
+        this.getData('娱乐',5);
     },
     methods:{
-        getData(text){
-            axios.get('/videos/get_video_by_label',{params:{label:text,num:-1}})
+        getData(text,id){
+            axios.get('/videos/get_video_by_label',{params:{label:text,num:id}})
             .then((response)=>{
                 console.log(response.data);
-                response.data.video.forEach((video,index) => {
+                if(id===-1){ response.data.video.forEach((video,index) => {
                     // this.videos[index]=video;
                     this.$set(this.videos,index,video)
+                });}
+                else {
+                  response.data.video.forEach((video,index) => {
+                    // this.videos[index]=video;
+                    this.$set(this.top_videos,index,video)
                 });
+                }
+               
             })
             .catch(error => {
                console.log(error);
@@ -57,11 +75,27 @@ export default{
 }
 </script>
 <style>
+
 .recreation{
   height:100%;
   width:100%;
   margin-top:5%;
 }
+.el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
+  }
+  
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+  
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
 .recommend-container {
 
   display: grid;
@@ -111,6 +145,7 @@ a{
 .router-link-active {
   text-decoration: none;
 }
+
 .title {
     position: relative;
     bottom: 0;

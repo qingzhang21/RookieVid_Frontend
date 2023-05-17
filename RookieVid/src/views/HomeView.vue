@@ -815,5 +815,8 @@ a{
   transform: translateX(calc(100% + 20px)) scale(0.8);
   z-index: 1;
 }
+.home{
+  margin:50px;
+}
 
 </style>
