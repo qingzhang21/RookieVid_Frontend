@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import Register from '../views/register/RegisterView.vue'
+import Login from '../views/login/LoginView.vue'
+// import Person from '../views/HomePage/PersonalView.vue'
 
 Vue.use(VueRouter)
 
@@ -24,7 +27,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/PersonView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/HomePage/PersonView.vue')
   },
   {
     path: '/message',
@@ -33,6 +36,16 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/MessageView.vue')
+  },
+  {
+    path: '/register', 
+    name: 'register',
+    component: Register
+  },
+  {
+    path: '/login', 
+    name: 'login',
+    component: Login
   }
 ]
 
