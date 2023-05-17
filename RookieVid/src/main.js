@@ -28,32 +28,3 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
-
-
-// axios({
-//   url:'', //链接
-//   //method:'get'
-//   //下面是专门针对get请求的参数拼接，例如？
-//   params:{
-//     type:'pop',
-//     page:1
-//   }
-// }).then(res=>{ 
-//   console.log(res);
-// })
-
-// axios.get()
-
-// //axios发送并发请求
-// //axios()中的是config
-// axios.all([axios({
-//   url:''
-// }),axios({
-//   url:'',
-//   params:{
-//     type:'sell',
-//     page:4
-//   }
-// })]).then(results=>{
-//   console.log(results);
-// })
