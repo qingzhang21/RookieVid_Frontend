@@ -3,41 +3,62 @@
     <!-- <el-button>上传视频</el-button> -->
     <div class="upload-body">
       <el-form :model="form" status-icon:rules="rules" ref="form" label-width="100px" class="upload-form">
+        <el-upload
+          v-model="form.video"
+          class="upload-demo"
+          drag
+          accept=".mp4"
+          >
+          <i class="el-icon-upload"></i>
+          <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          <div class="el-upload__tip" slot="tip">只能上传mp4文件</div>
+        </el-upload>
         <div class="video_info">
-        <el-form-item label="视频标题" prop="title" style="margin-top:20px;width:100%">
-              <el-input v-model="form.title" ></el-input>
-        </el-form-item>
-        <el-form-item label="视频封面" prop="cover" style="margin-top:20px">
-              <el-input v-model="form.cover" id="upload_cover" type="file" accept=".jpg,.png,.jpeg" style="display:none;" ></el-input>
-              <label for="upload_cover">
-                <img src="../assets/upload/upload_cover.png" style="height: 100px; width:100px;opacity: 0.6;">
-              </label>
-
-        </el-form-item>
-        <el-form-item label="分区" prop="label" style="margin-top: 20px;display:inline;">
-          <el-select v-model="form.label" placeholder="请选择分区">
-             <el-option label="娱乐" value="娱乐"></el-option>
-             <el-option label="生活" value="生活"></el-option>
-             <el-option label="学习" value="学习"></el-option>
-             <el-option label="游戏" value="游戏"></el-option>
-             <el-option label="运动" value="运动"></el-option>
-             <el-option label="美食" value="美食"></el-option>
-             <el-option label="音乐" value="音乐"></el-option>
-             <el-option label="影视" value="影视"></el-option>
-             <el-option label="科技" value="科技"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="简介" prop="description" style="margin-top: 20px;width:100%">
-            <el-input v-model="form.description"></el-input>
-        </el-form-item>
+          <el-form-item label="视频标题" prop="title" style="margin-top:20px;width:100%">
+                <el-input v-model="form.title" ></el-input>
+          </el-form-item>
+          <el-form-item label="视频封面" prop="cover" style="margin-top:20px">
+                <!-- <el-input v-model="form.cover" id="upload_cover" type="file" accept=".jpg,.png,.jpeg" style="display:none;" ></el-input>
+                <label for="upload_cover">
+                  <img src="../assets/upload/upload_cover.png" style="height: 100px; width:100px;opacity: 0.6;">
+                </label> -->
+                <el-upload
+                  action="https://jsonplaceholder.typicode.com/posts/"
+                  list-type="picture-card"
+                  :on-preview="handlePictureCardPreview"
+                  :on-remove="handleRemove">
+                  <i class="el-icon-plus"></i>
+                </el-upload>
+                <el-dialog :visible.sync="dialogVisible">
+                  <img width="100%" :src="dialogImageUrl" alt="">
+                </el-dialog>
+          </el-form-item>
+          
+          <el-form-item label="分区" prop="label" style="margin-top: 20px;display:inline;">
+            <el-select v-model="form.label" placeholder="请选择分区">
+              <el-option label="娱乐" value="娱乐"></el-option>
+              <el-option label="生活" value="生活"></el-option>
+              <el-option label="学习" value="学习"></el-option>
+              <el-option label="游戏" value="游戏"></el-option>
+              <el-option label="运动" value="运动"></el-option>
+              <el-option label="美食" value="美食"></el-option>
+              <el-option label="音乐" value="音乐"></el-option>
+              <el-option label="影视" value="影视"></el-option>
+              <el-option label="科技" value="科技"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="简介" prop="description" style="margin-top: 20px;width:100%">
+              <el-input v-model="form.description"></el-input>
+          </el-form-item>
         </div>
-        <div class="upload_video" prop="video">
+        
+        <!-- <div class="upload_video" prop="video">
           <el-input v-model="form.video" id="upload_video" type="file" ref="fileInput" accept=".mp4"  style="display:none"/>
           <label for="upload_video">
             <img src="../assets/upload/cloud_upload.svg" style="opacity:0.6">
           </label>
           <div>请在此处选择视频</div>
-        </div>
+        </div> -->
       <el-button @click="uploadVideo" style="margin-top:20px;">上传</el-button>
       <div v-if="uploading">
         <p>正在上传...</p>
@@ -55,6 +76,8 @@ export default {
       file: null,          // 选择的视频文件对象
       uploading: false,    // 是否正在上传
       uploadProgress: 0,  // 上传进度，0-100
+      dialogImageUrl: '',
+      dialogVisible: false,
       form:{
         video:'',
         cover:'',
@@ -72,7 +95,13 @@ export default {
   },
 
   methods: {
-    
+    handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePictureCardPreview(file) {
+        this.dialogImageUrl = file.url;
+        this.dialogVisible = true;
+      },
     uploadVideo(){
       if (!this.form.video) {
           alert('请先选择视频文件');
@@ -86,24 +115,24 @@ export default {
       formData.append("title",this.form.title);
       formData.append("description",this.form.description);
       console.log(this.form);
-      axios.post('/videos/upload_video',formData, {
-          onUploadProgress: progressEvent => {
-            this.uploadProgress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-            console.log(this.uploadProgress);
-          }
-        })
-      .then((res)=>{
-        if(res.errorno==0){ 
-          alert("上传成功");
+      // axios.post('/videos/upload_video',formData, {
+      //     onUploadProgress: progressEvent => {
+      //       this.uploadProgress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+      //       console.log(this.uploadProgress);
+      //     }
+      //   })
+      // .then((res)=>{
+      //   if(res.errorno==0){ 
+      //     alert("上传成功");
          
-        }else {
-            alert(res.data.msg)
-          }
-          console.log(res.data.msg);
-          this.uploading=false;
-          this.uploadProgress=0;
-          // this.uploadProgress = { value: 0, displayValue: '0%' };
-      })
+      //   }else {
+      //       alert(res.data.msg)
+      //     }
+      //     console.log(res.data.msg);
+      //     this.uploading=false;
+      //     this.uploadProgress=0;
+      //     // this.uploadProgress = { value: 0, displayValue: '0%' };
+      // })
     }
 
   }
@@ -137,7 +166,7 @@ export default {
 .upload-body{
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 150%;
   overflow: hidden;
   background-image:url('../assets/upload/upload_background.jpeg');
   background-size: 100% 100%;
